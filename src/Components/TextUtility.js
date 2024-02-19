@@ -1,7 +1,16 @@
 import React from 'react'
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 function TextUtility(props) {
+    const [text, setTextValue] = useState('')
+    const [wordCount, setWordCount] = useState(0);
+    const [charCount, setCharCount] = useState(0);
+
+    useEffect(() => {
+        const words = text.split(" ").filter((word) => word !== "");
+        setWordCount(words.length);
+        setCharCount(text.length);
+    }, [text]);
 
     let textchange = (e) => {
         setTextValue(e.target.value)
@@ -54,10 +63,14 @@ function TextUtility(props) {
         document.body.appendChild(a);
         a.click();
         document.body.removeChild(a);
-      };
+    };
 
 
-    const [text, setTextValue] = useState('')
+    let clearAll = () => {
+        setTextValue('')
+    }
+
+
     return (
         <>
             <div className="container-fluid d-md-flex align-items-center py-1" style={{ height: "" }}>
@@ -67,7 +80,7 @@ function TextUtility(props) {
                     </div>
                     <div className="form-floating">
                         <textarea className="form-control" placeholder="Leave a comment here" id="floatingTextarea2"
-                            style={{ height: "13rem" }} onChange={textchange}></textarea>
+                            style={{ height: "13rem" }} value={text} onChange={textchange}></textarea>
                         <label htmlFor="floatingTextarea2">Type or Paste your text here</label>
                     </div>
                     <div className="d-flex flex-column">
@@ -76,13 +89,14 @@ function TextUtility(props) {
                             <button disabled={text.length === 0} type="button" className="btn btn-primary m-1" onClick={textUppercase}>Uppercase</button>
                             <button disabled={text.length === 0} type="button" className="btn btn-primary m-1" onClick={textCapitalize}>Capitalize</button>
                             <button disabled={text.length === 0} type="button" className="btn btn-primary m-1" onClick={cleanSpaces}>Clean Spaces</button>
+                            <button disabled={text.length === 0} type="button" className="btn btn-primary m-1" onClick={clearAll}>Clear all</button>
                         </div>
                     </div>
 
                 </div>
                 <div className="container my-5" style={{ height: "50%" }}>
                     <div className="characters .order-md-2 my-1">
-                        <b>Easy tool to transform your text</b>
+                        <b>Words Count : {wordCount}  Characters Count : {charCount}</b>
                     </div>
                     <div className="form-floating mb-3">
                         <textarea className="form-control" placeholder="Leave a comment here" id="floatingTextarea2Disabled" style={{ height: "13rem" }} disabled value={text}></textarea>
