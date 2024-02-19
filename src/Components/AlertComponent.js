@@ -4,7 +4,7 @@ function AlertComponent(props) {
     return (
         <div style={{height:"50px"}}>
             {props.alert && <div className={`alert alert-${props.alert.type}`} role="alert">
-                <strong>{props.alert.type}</strong>: Text Changed to {props.alert.msg} form.
+                <strong>{props.alert.type}</strong>: {props.alert.msg}
             </div>}
         </div>
     )

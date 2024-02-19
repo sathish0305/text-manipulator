@@ -10,13 +10,13 @@ function TextUtility(props) {
     let textLowercase = () => {
         let txtLowerCase = text.toLowerCase();
         setTextValue(txtLowerCase)
-        props.showAlert('Lowercase', 'success')
+        props.showAlert('Text Changed to Lowercase', 'success')
     }
 
     let textUppercase = () => {
         let txtLowerCase = text.toUpperCase();
         setTextValue(txtLowerCase)
-        props.showAlert('Uppercase', 'success')
+        props.showAlert('Text Changed to Uppercase', 'success')
     }
 
     let textCapitalize = () => {
@@ -31,18 +31,30 @@ function TextUtility(props) {
             }
         })
         setTextValue(txtSentence.join(' '))
-        props.showAlert('Capitalized', 'success')
+        props.showAlert('Text Changed to Capitalized', 'success')
     }
 
     let cleanSpaces = () => {
         let textSpace = text.replace(/\s+/g, " ")
         setTextValue(textSpace)
-        props.showAlert('with Cleaned Spaces', 'success')
+        props.showAlert('Text Changed with Cleaned Spaces', 'success')
     }
 
     let copytext = () => {
         navigator.clipboard.writeText(text)
+        props.showAlert('Text copied to Clipboard', 'success')
     }
+
+    const handleDownload = () => {
+        const blob = new Blob([text], { type: "text/plain" });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = "text.txt";
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+      };
 
 
     const [text, setTextValue] = useState('')
@@ -79,7 +91,7 @@ function TextUtility(props) {
                     <div className="d-flex">
                         <div className="d-flex align-items-center justify-content-around flex-wrap">
                             <button type="button" className="btn btn-primary m-1" onClick={copytext}>Copy</button>
-                            <button type="button" className="btn btn-primary m-1">Download</button>
+                            <button type="button" className="btn btn-primary m-1" onClick={handleDownload}>Download</button>
                         </div>
                     </div>
                 </div>
