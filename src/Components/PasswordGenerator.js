@@ -51,7 +51,7 @@ function PasswordGenerator(props) {
       navigator.clipboard
         .writeText(password)
         .then(() => {
-          alert("Text copied to clipboard");
+          props.showAlert('Text copied to Clipboard', 'success')
         })
         .catch(() => {
           alert("Something went wrong while copying");
