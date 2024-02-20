@@ -38,7 +38,8 @@ function TextUtility(props) {
                 let rest_letters = word.slice(1)
                 return first_letter.toUpperCase() + rest_letters.toLowerCase()
             }
-        })
+            return '';
+        });
         setTextValue(txtSentence.join(' '))
         props.showAlert('Text Changed to Capitalized', 'success')
     }
@@ -50,8 +51,12 @@ function TextUtility(props) {
     }
 
     let copytext = () => {
-        navigator.clipboard.writeText(text)
-        props.showAlert('Text copied to Clipboard', 'success')
+        if(text){
+            navigator.clipboard.writeText(text)
+            props.showAlert('Text copied to Clipboard', 'success')
+        }else{
+            props.showAlert('No text to copy','danger')
+        }
     }
 
     const handleDownload = () => {
