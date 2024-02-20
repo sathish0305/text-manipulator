@@ -24,7 +24,7 @@ function App() {
       <AlertComponent alert={alert} />
       <Routes>
         <Route path='/' element={<TextUtility showAlert={showAlert} />} />
-        <Route path='/passwordgenerator' element={<PasswordGenerator />} />
+        <Route path='/passwordgenerator' element={<PasswordGenerator  showAlert={showAlert} />} />
       </Routes>
     </div>
   );
