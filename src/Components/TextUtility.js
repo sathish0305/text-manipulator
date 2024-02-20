@@ -51,11 +51,11 @@ function TextUtility(props) {
     }
 
     let copytext = () => {
-        if(text){
+        if (text) {
             navigator.clipboard.writeText(text)
             props.showAlert('Text copied to Clipboard', 'success')
-        }else{
-            props.showAlert('No text to copy','danger')
+        } else {
+            props.showAlert('No text to copy', 'danger')
         }
     }
 
